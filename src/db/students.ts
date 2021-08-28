@@ -20,8 +20,24 @@ function addStudent(student: Student) {
     id: students.length ? students[students.length - 1].id! + 1 : 1,
     ...student,
   };
-  students.push(Object.freeze(newStudent));
+  students.push(newStudent);
   return Promise.resolve(newStudent);
+}
+
+/**
+ * Update an existing student from list
+ * @param id Existing student ID
+ * @param student Student data
+ * @returns new student
+ */
+function updateStudent(id: number, body: Student) {
+  const student = students.find((student) => student.id === id);
+
+  if (!student) return Promise.resolve(null);
+
+  Object.assign(student, body);
+
+  return Promise.resolve(student);
 }
 
 /**
@@ -30,4 +46,4 @@ function addStudent(student: Student) {
  */
 const getStudents = () => Promise.resolve(Object.freeze([...students]));
 
-export { addStudent, getStudents };
+export { addStudent, getStudents, updateStudent };

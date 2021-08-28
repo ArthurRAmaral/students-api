@@ -15,3 +15,11 @@ export const StudentSchema = {
   email: Joi.string().required().email(),
   city: Joi.string().required(),
 };
+
+export const UpdateStudentSchema = {
+  id: Joi.number(),
+  name: Joi.string(),
+  birth: Joi.date(),
+  email: Joi.string().email(),
+  city: Joi.string(),
+};
