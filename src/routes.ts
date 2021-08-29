@@ -20,6 +20,7 @@ routes.put(
   celebrate({ body: Joi.object().keys(UpdateStudentSchema) }),
   studentsController.update
 );
+routes.delete("/students/:id", studentsController.delete);
 
 //? Why not add a delete and get one routes/
 

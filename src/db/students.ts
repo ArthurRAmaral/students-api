@@ -41,9 +41,25 @@ function updateStudent(id: number, body: Student) {
 }
 
 /**
+ * Delete an existing student from list
+ * @param id Existing student ID
+ * @param student Student data
+ * @returns new student
+ */
+function deleteStudent(id: number): Promise<boolean> {
+  const studentIndex = students.findIndex((student) => student.id === id);
+
+  if (studentIndex < 0) return Promise.resolve(false);
+
+  const removedUsers = students.splice(studentIndex, 1);
+
+  return Promise.resolve(removedUsers.length > 0);
+}
+
+/**
  * Returns student list
  * @returns Students
  */
 const getStudents = () => Promise.resolve(Object.freeze([...students]));
 
-export { addStudent, getStudents, updateStudent };
+export { addStudent, getStudents, updateStudent, deleteStudent };

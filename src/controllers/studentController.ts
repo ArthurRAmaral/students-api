@@ -19,7 +19,7 @@ export class StudentsController {
     const { id: stringId } = req.params;
     const id = parseInt(stringId);
 
-    if (!id || req.body.id !== id)
+    if (!id || (req.body.id && req.body.id !== id))
       return res.status(StatusCodes.BAD_REQUEST).send();
 
     const updatedStudent = await StudentsDB.updateStudent(id, req.body);
@@ -27,5 +27,18 @@ export class StudentsController {
     if (!updatedStudent) return res.status(StatusCodes.NOT_FOUND).send();
 
     return res.status(StatusCodes.OK).json(updatedStudent);
+  }
+
+  async delete(req: Request, res: Response) {
+    const { id: stringId } = req.params;
+    const id = parseInt(stringId);
+
+    if (!id) return res.status(StatusCodes.BAD_REQUEST).send();
+
+    const studentWasDeleted = await StudentsDB.deleteStudent(id);
+
+    if (!studentWasDeleted) return res.status(StatusCodes.NOT_FOUND).send();
+
+    return res.status(StatusCodes.NO_CONTENT).send();
   }
 }
