@@ -32,4 +32,19 @@ describe("Test student requests", () => {
       .send(newStudent)
       .then((res) => expect(res.body).toMatchObject({ id: 2, ...newStudent }));
   });
+
+  it("should update a student", async () => {
+    const updatedStudent = {
+      id: 1,
+      name: "John Doe Update",
+      email: "john.doe.update@example.com",
+      city: "Belo Horizonte",
+      birth: new Date("11/13/1999").toISOString(),
+    };
+
+    await supertest(app)
+      .put(`/students/${updatedStudent.id}`)
+      .send(updatedStudent)
+      .then((res) => expect(res.body).toMatchObject({ ...updatedStudent }));
+  });
 });
