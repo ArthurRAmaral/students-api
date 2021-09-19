@@ -19,7 +19,7 @@ export class StudentsController {
     const { id: stringId } = req.params;
     const id = parseInt(stringId);
 
-    if (!id || (req.body.id && req.body.id !== id))
+    if (!id || !req.body.id || (req.body.id && req.body.id !== id))
       return res.status(StatusCodes.BAD_REQUEST).send();
 
     const updatedStudent = await StudentsDB.updateStudent(id, req.body);
