@@ -11,6 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAME: ${{secrets.NAME}}
+      WORLD: "Palavra"
     steps:
-      - name: Say hello
+      - name: Say hello secrete
         run: echo "Hello $NAME"
+      - name: Say hello env world
+        run: echo "Hello $WORLD"
+
+  listing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: List all files
+        run: ls
+      - name: Show package.json
+        run: cat package.json
