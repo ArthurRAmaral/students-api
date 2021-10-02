@@ -1,0 +1,16 @@
+name: New students Api Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello:
+    name: Hello world
+    runs-on: ubuntu-latest
+    env:
+      NAME: ${{secrets.NAME}}
+    steps:
+      - name: Say hello
+        run: echo "Hello $NAME"
