@@ -110,4 +110,32 @@ describe("Test student requests", () => {
       .send(updatedStudent)
       .then((res) => expect(res.status).toBe(400));
   });
+
+  it("should return 400 if the query id doesn't exist", async () => {
+    await supertest(app)
+      .delete(`/students/0`)
+      .then((res) => expect(res.status).toBe(400));
+  });
+
+  it("should return 400 if the query id isn't a number", async () => {
+    await supertest(app)
+      .delete(`/students/shulambs`)
+      .then((res) => expect(res.status).toBe(400));
+  });
+
+  it("should return 204 if the student is successfully deleted", async () => {
+    const id = 1;
+
+    await supertest(app)
+      .delete(`/students/${id}`)
+      .then((res) => expect(res.status).toBe(204));
+  });
+
+  it("should return 404 if the student doesn't exists", async () => {
+    const id = -1;
+
+    await supertest(app)
+      .delete(`/students/${id}`)
+      .then((res) => expect(res.status).toBe(404));
+  });
 });
