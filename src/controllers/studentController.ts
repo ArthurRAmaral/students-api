@@ -35,9 +35,9 @@ export class StudentsController {
 
     if (!id) return res.status(StatusCodes.BAD_REQUEST).send();
 
-    // const studentWasDeleted = await StudentsDB.deleteStudent(id);
+    const studentWasDeleted = await StudentsDB.deleteStudent(id);
 
-    // if (!studentWasDeleted) return res.status(StatusCodes.NOT_FOUND).send();
+    if (!studentWasDeleted) return res.status(StatusCodes.NOT_FOUND).send();
 
     return res.status(StatusCodes.NO_CONTENT).send();
   }
