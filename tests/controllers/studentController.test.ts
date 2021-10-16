@@ -1,5 +1,51 @@
 import app from "..";
 import supertest from "supertest";
+import { Student } from "../../src/entities/Student";
+
+const students: Student[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    city: "Belo Horizonte",
+    birth: new Date("11/13/1999"),
+  },
+];
+
+jest.mock("../../src/db/students.ts", () => {
+  const originalModule = jest.requireActual("../../src/db/students.ts");
+
+  return {
+    ...originalModule,
+    addStudent: (student: Student) => {
+      const newStudent = {
+        id: students.length ? students[students.length - 1].id! + 1 : 1,
+        ...student,
+      };
+      students.push(newStudent);
+      return Promise.resolve(newStudent);
+    },
+    updateStudent: (id: number, body: Student) => {
+      const student = students.find((student) => student.id === id);
+
+      if (!student) return Promise.resolve(null);
+
+      Object.assign(student, body);
+
+      return Promise.resolve(student);
+    },
+    deleteStudent: (id: number): Promise<boolean> => {
+      const studentIndex = students.findIndex((student) => student.id === id);
+
+      if (studentIndex < 0) return Promise.resolve(false);
+
+      const removedUsers = students.splice(studentIndex, 1);
+
+      return Promise.resolve(removedUsers.length > 0);
+    },
+    getStudents: () => Promise.resolve(Object.freeze([...students])),
+  };
+});
 
 describe("Test student requests", () => {
   it("should return the example student", async () => {
