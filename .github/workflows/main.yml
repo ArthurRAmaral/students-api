@@ -9,9 +9,6 @@ jobs:
   build:
     name: Generate build
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: ${{secrets.NODE_ENV}}
-      PORT: ${{secrets.PORT}}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
