@@ -7,7 +7,7 @@ const routes = express.Router();
 
 const studentsController = new StudentsController();
 
-routes.get("/ping", (_, res) => res.send("pongv2"));
+routes.get("/ping", (_, res) => res.send("pong"));
 
 routes.get("/students", studentsController.get);
 routes.post(
@@ -21,7 +21,5 @@ routes.put(
   studentsController.update
 );
 routes.delete("/students/:id", studentsController.delete);
-
-//? Why not add a delete and get one routes/
 
 export default routes;

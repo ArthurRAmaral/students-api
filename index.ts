@@ -4,7 +4,7 @@ import "reflect-metadata";
 import { setupConnection } from "./config";
 dotenv.config();
 
-const port = Number(process.env.PORT) + 3;
+const port = process.env.PORT;
 
 app.listen(port, async () => {
   await setupConnection();
