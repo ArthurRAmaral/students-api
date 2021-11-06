@@ -16,14 +16,23 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: npm install
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "ger-config"
+          heroku_email: "${{secrets.HEROKU_USER_EMAIL}}"
+          # healthcheck: "https://ger-config.herokuapp.com/ping"
+          # checkstring: "pong"
+          # rollbackonhealthcheckfailed: true
 
-      - name: Run Tests
-        run: npm run test
+      # - name: Install Dependencies
+      #   run: npm install
 
-      - name: Create Build
-        run: npm run build
+      # - name: Run Tests
+      #   run: npm run test
 
-      - name: Show build dist
-        run: ls dist
+      # - name: Create Build
+      #   run: npm run build
+
+      # - name: Show build dist
+      #   run: ls dist
