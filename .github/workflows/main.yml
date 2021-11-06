@@ -30,4 +30,5 @@ jobs:
           stack: "container"
           healthcheck: "https://ger-config.herokuapp.com/ping"
           checkstring: "pongv2"
+          delay: 5
           rollbackonhealthcheckfailed: true
