@@ -26,6 +26,6 @@ jobs:
           heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
           stack: "container"
           healthcheck: "https://ger-config.herokuapp.com/ping"
-          checkstring: "pong"
+          checkstring: "pong v2"
           delay: 5
           rollbackonhealthcheckfailed: true

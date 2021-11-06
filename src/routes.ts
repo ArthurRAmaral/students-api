@@ -7,7 +7,7 @@ const routes = express.Router();
 
 const studentsController = new StudentsController();
 
-routes.get("/ping", (_, res) => res.send("pong"));
+routes.get("/ping", (_, res) => res.send("pong v2"));
 
 routes.get("/students", studentsController.get);
 routes.post(
