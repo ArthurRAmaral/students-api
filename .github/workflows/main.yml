@@ -26,7 +26,7 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "ger-config"
-          heroku_email: "${{secrets.HEROKU_USER_EMAIL}}"
+          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
           stack: "container"
           healthcheck: "https://ger-config.herokuapp.com/ping"
           checkstring: "pong"
